@@ -1,6 +1,7 @@
 # familybot
 
-A new Flutter project.
+A new Flutter project for checking event in family (also for persional too).
+UI Design : https://www.figma.com/file/8ne58ZIRrjRnWnC08MgUyq/FamilyBOT?type=design&node-id=0%3A1&mode=design&t=X02dq28Qy5bCx3Ow-1
 
 ## Getting Started
 
