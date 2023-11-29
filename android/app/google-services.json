@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "778857361651",
+    "project_id": "familybot-7f30f",
+    "storage_bucket": "familybot-7f30f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778857361651:android:dbd5572893dfb570570786",
+        "android_client_info": {
+          "package_name": "com.familybot.familybot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtM8FRDsMLzAMs3xJU0_MJsDU3kCuy_Sk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
