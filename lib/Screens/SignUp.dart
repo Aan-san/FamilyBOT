@@ -1,9 +1,13 @@
+import 'package:familybot/Repository/UserRepo.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import '../Models/user.dart';
 import 'Login.dart';
 
 class SignUpScreen extends StatefulWidget{
-  const SignUpScreen({Key? key}) : super(key : key);
+  final VoidCallback show;
+  SignUpScreen(this.show, {super.key});
 
   @override
   SignUpScreenState createState() => SignUpScreenState();
@@ -12,16 +16,16 @@ class SignUpScreen extends StatefulWidget{
 
 class SignUpScreenState extends State<SignUpScreen>{
   // Create text box variable
-  final name     = TextEditingController();
-  final phone     = TextEditingController();
-  final password  = TextEditingController();
+  final email     = TextEditingController();
+  final password     = TextEditingController();
+  final repassword  = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    name.dispose();
-    phone.dispose();
+    email.dispose();
     password.dispose();
+    repassword.dispose();
     super.dispose();
   }
 
@@ -79,7 +83,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
 
-                  // PHONE NUMBER BOX
+                  // EMAIL BOX
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
                     child: TextFormField(
@@ -95,7 +99,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                           ),
 
                         ),
-                        hintText: 'phone number',
+                        hintText: 'email',
                         hintStyle: TextStyle(
                           color: Colors.greenAccent,
                           fontWeight: FontWeight.w800,
@@ -105,12 +109,11 @@ class SignUpScreenState extends State<SignUpScreen>{
                           color: Colors.greenAccent,
                         ),
                       ),
-                      keyboardType: const TextInputType.numberWithOptions(),
                       validator: (String? input_value){
-                        return (input_value != null && input_value.length !=10)
-                            ?'Input phone number again pls' : null;
+                        return (input_value != null)
+                            ?'Input email pls' : null;
                       },
-                      controller: phone,
+                      controller: email,
                     ),
                   ),
 
@@ -152,6 +155,42 @@ class SignUpScreenState extends State<SignUpScreen>{
 
                   // SPACE
                   SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.004,
+                  ),
+
+                  // REPASSWORD BOX
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextFormField(
+                      obscureText: true,
+                      style: const TextStyle(color: Colors.green),
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.greenAccent,
+                            width: 3,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        hintText: 'confirm password',
+                        hintStyle: TextStyle(
+                          color: Colors.greenAccent,
+                          fontWeight: FontWeight.w800,
+                        ),
+
+                        icon: Icon(
+                          Icons.lock_outline,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
+                      controller: repassword,
+                    ),
+                  ),
+
+                  // SPACE
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.005,
                   ),
 
@@ -187,7 +226,9 @@ class SignUpScreenState extends State<SignUpScreen>{
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              widget.show;
+                            },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.3,
                               padding: EdgeInsets.all(
@@ -201,7 +242,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                               ),
                               child: Center(
                                 child: Text(
-                                  'Sign Up',
+                                  'Back',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: MediaQuery.of(context).size.width * 0.06,
@@ -216,11 +257,9 @@ class SignUpScreenState extends State<SignUpScreen>{
 
                           GestureDetector(
                             onTap: () {
+                              AuthenticationRemote()
+                                  .register(email.text, password.text, repassword.text);
 
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_)=> const LoginScreen(),
-                                  ));
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.5,
@@ -235,7 +274,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                               ),
                               child: Center(
                                 child: Text(
-                                  'Login',
+                                  'Sign Up',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: MediaQuery.of(context).size.width * 0.06,
@@ -258,12 +297,4 @@ class SignUpScreenState extends State<SignUpScreen>{
       );
     }
   }
-}
-
-bool CheckLogin(String? phone , String? pass){
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-
-
-  return false;
 }

@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'Login.dart';
+import '../auth/auth_page.dart';
+import 'Home.dart';
 
 class SplashScreen extends StatefulWidget{
-  const SplashScreen({Key? key}) : super(key : key);
+  const SplashScreen({super.key});
 
   @override
   SplashScreenState createState() => SplashScreenState();
@@ -22,8 +24,9 @@ class SplashScreenState extends State<SplashScreen> with SingleTickerProviderSta
       // call login screen
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_)=> const LoginScreen(),
-      ));
+            builder: (_)=>  Auth_Page(),
+          ));
+
     });
   }
 

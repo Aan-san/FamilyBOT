@@ -1,11 +1,10 @@
-import 'package:familybot/Models/user.dart';
-import 'package:familybot/Screens/SignUp.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Home.dart';
+import '../Repository/UserRepo.dart';
+
 
 class LoginScreen extends StatefulWidget{
-  const LoginScreen({Key? key}) : super(key : key);
+  final VoidCallback show;
+  LoginScreen(this.show,{super.key});
 
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -14,13 +13,13 @@ class LoginScreen extends StatefulWidget{
 
 class LoginScreenState extends State<LoginScreen>{
 
-  final phone     = TextEditingController();
+  final email     = TextEditingController();
   final password  = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    phone.dispose();
+    email.dispose();
     password.dispose();
     super.dispose();
   }
@@ -70,7 +69,7 @@ class LoginScreenState extends State<LoginScreen>{
                           ),
 
                         ),
-                        hintText: 'phone number',
+                        hintText: 'email',
                         hintStyle: TextStyle(
                           color: Colors.greenAccent,
                           fontWeight: FontWeight.w800,
@@ -80,12 +79,11 @@ class LoginScreenState extends State<LoginScreen>{
                           color: Colors.greenAccent,
                         ),
                       ),
-                      keyboardType: const TextInputType.numberWithOptions(),
                       validator: (String? input_value){
-                          return (input_value != null && input_value.length !=10)
-                                      ?'Input phone number again pls' : null;
+                          return (input_value != null)
+                                      ?'Input email again pls' : null;
                       },
-                      controller: phone,
+                      controller: email,
                     ),
                   ),
                   SizedBox(
@@ -155,10 +153,7 @@ class LoginScreenState extends State<LoginScreen>{
                       children: [
                         GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (_)=> const SignUpScreen(),
-                              ));
+                          widget.show;
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.3,
@@ -187,42 +182,8 @@ class LoginScreenState extends State<LoginScreen>{
                         // LOGIN Button
                         SizedBox(width: MediaQuery.of(context).size.height * 0.03,),
                         GestureDetector(
-                          onTap: () {
-                            if(CheckLogin(phone.text,password.text)){
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_)=> const HomeScreen(),
-                                  ));
-                            }
-                            else
-                            {
-                              AlertDialog(
-                                title: const Text('Login',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w800,
-                                  ),),
-                                content: const SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Text('This is a demo alert dialog.',
-                                        style: TextStyle(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.w800,
-                                        ),),
-                                    ],
-                                  ),
-                                ),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: const Text('Approve'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            }
+                          onTap: () async {
+                            AuthenticationRemote().login(email.text, password.text);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.5,
@@ -248,10 +209,8 @@ class LoginScreenState extends State<LoginScreen>{
                           ),
                         ),
                       ],
-
                     )
                   )
-
                 ],
               ),
             ),
@@ -260,25 +219,4 @@ class LoginScreenState extends State<LoginScreen>{
       );
     }
   }
-}
-
-bool CheckLogin(String? phone , String? pass){
-
-  bool check =false;
-  FirebaseFirestore.instance
-      .collection('users')
-      .get()
-      .then((QuerySnapshot querySnapshot) {
-            querySnapshot.docs.forEach((doc) {
-                if((doc['phonenumber'].toString() ==phone)
-                  &&(doc['password'].toString() ==pass)){
-                  check = true;
-                }
-                else{
-                  check = false;
-                }
-            });
-  });
-
-  return check;
 }
