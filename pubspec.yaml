@@ -39,7 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.23.0
   cloud_firestore: ^4.13.2
-  firebase_auth: ^4.3.0
+  firebase_auth: ^4.16.0
   msh_checkbox: ^1.1.1
   uuid: ^3.0.6
 

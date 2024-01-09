@@ -102,7 +102,7 @@ class _Edit_ScreenState extends State<Edit_Screen> {
                 margin: EdgeInsets.all(8),
                 child: Column(
                   children: [
-                    Image.asset('images/${index}.png'),
+                    Image.asset('assets/${index}.png'),
                   ],
                 ),
               ),

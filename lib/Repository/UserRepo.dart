@@ -25,4 +25,9 @@ class AuthenticationRemote extends AuthenticationDatasource {
       });
     }
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../Repository/UserRepo.dart';
+import 'Home.dart';
+import 'SignUp.dart';
 
 
 class LoginScreen extends StatefulWidget{
-  final VoidCallback show;
-  LoginScreen(this.show,{super.key});
+  const LoginScreen({Key? key}) : super(key : key);
 
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -153,7 +154,10 @@ class LoginScreenState extends State<LoginScreen>{
                       children: [
                         GestureDetector(
                         onTap: () {
-                          widget.show;
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (_)=>  const SignUpScreen(),
+                              ));
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.3,

@@ -106,7 +106,7 @@ class _Task_WidgetState extends State<Task_Widget> {
               ),
               child: Row(
                 children: [
-                  Image.asset('images/icon_time.png'),
+                  Image.asset('assets/icon_time.png'),
                   SizedBox(width: 10),
                   Text(
                     widget._note.time,
@@ -141,7 +141,7 @@ class _Task_WidgetState extends State<Task_Widget> {
                 ),
                 child: Row(
                   children: [
-                    Image.asset('images/icon_edit.png'),
+                    Image.asset('assets/icon_edit.png'),
                     SizedBox(width: 10),
                     Text(
                       'edit',
@@ -167,7 +167,7 @@ class _Task_WidgetState extends State<Task_Widget> {
       decoration: BoxDecoration(
         color: Colors.white,
         image: DecorationImage(
-          image: AssetImage('images/${widget._note.image}.png'),
+          image: AssetImage('assets/${widget._note.image}.png'),
           fit: BoxFit.cover,
         ),
       ),

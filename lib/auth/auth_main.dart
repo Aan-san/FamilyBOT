@@ -1,8 +1,7 @@
 import 'package:familybot/Screens/Splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:familybot/auth/auth_page.dart';
-import 'package:familybot/Screens/Home.dart';
+import '../Screens/Home.dart';
 
 class Main_Page extends StatelessWidget {
   const Main_Page({super.key});
@@ -13,8 +12,12 @@ class Main_Page extends StatelessWidget {
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
-          return const SplashScreen();
-
+          if (snapshot.hasData) {
+            return const HomeScreen();
+          }
+          else {
+            return const SplashScreen();
+          }
         },
       ),
     );

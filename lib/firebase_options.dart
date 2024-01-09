@@ -57,6 +57,7 @@ class DefaultFirebaseOptions {
     appId: '1:778857361651:android:dbd5572893dfb570570786',
     messagingSenderId: '778857361651',
     projectId: 'familybot-7f30f',
+    authDomain: 'familybot-7f30f.firebaseapp.com',
     storageBucket: 'familybot-7f30f.appspot.com',
   );
 
@@ -66,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '778857361651',
     projectId: 'familybot-7f30f',
     storageBucket: 'familybot-7f30f.appspot.com',
+    authDomain: 'familybot-7f30f.firebaseapp.com',
     iosBundleId: 'com.familybot.familybot',
   );
 
@@ -76,5 +78,6 @@ class DefaultFirebaseOptions {
     projectId: 'familybot-7f30f',
     storageBucket: 'familybot-7f30f.appspot.com',
     iosBundleId: 'com.familybot.familybot.RunnerTests',
+    authDomain: 'familybot-7f30f.firebaseapp.com',
   );
 }

@@ -6,8 +6,7 @@ import '../Models/user.dart';
 import 'Login.dart';
 
 class SignUpScreen extends StatefulWidget{
-  final VoidCallback show;
-  SignUpScreen(this.show, {super.key});
+  const SignUpScreen({Key? key}) : super(key : key);
 
   @override
   SignUpScreenState createState() => SignUpScreenState();
@@ -49,7 +48,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                 children: [
                   // SPACE
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
+                    height: MediaQuery.of(context).size.height * 0.05,
                   ),
 
                   // TILTE
@@ -61,7 +60,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                        Text(
                       'Create',
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.1,
+                          fontSize: MediaQuery.of(context).size.width * 0.12,
                           color: Colors.white,
                           fontWeight: FontWeight.w800,
                         ),
@@ -69,7 +68,7 @@ class SignUpScreenState extends State<SignUpScreen>{
                         Text(
                           'Account',
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.width * 0.1,
+                            fontSize: MediaQuery.of(context).size.width * 0.12,
                             color: Colors.white,
                             fontWeight: FontWeight.w800,
                           ),
@@ -80,7 +79,7 @@ class SignUpScreenState extends State<SignUpScreen>{
 
                   // SPACE
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
 
                   // EMAIL BOX
@@ -119,7 +118,7 @@ class SignUpScreenState extends State<SignUpScreen>{
 
                   // SPACE
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.04,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
 
                   // PASSWORD BOX
@@ -155,7 +154,7 @@ class SignUpScreenState extends State<SignUpScreen>{
 
                   // SPACE
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.004,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
 
                   // REPASSWORD BOX
@@ -189,37 +188,13 @@ class SignUpScreenState extends State<SignUpScreen>{
                     ),
                   ),
 
-                  // SPACE
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.005,
-                  ),
-
-                  // BUTTON FORGET
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      child :Row(
-                        mainAxisAlignment:MainAxisAlignment.end ,
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text('Forget Password',
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: MediaQuery.of(context).size.width * 0.05,
-                                  fontWeight: FontWeight.w800
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                  ),
 
                   // SPACE
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.05,
+                    height: MediaQuery.of(context).size.height * 0.04,
                   ),
 
-                  // BUTTON SIGN UP
+                  // BUTTON  LOGIN
                   SizedBox(
                       width: MediaQuery.of(context).size.width * 0.9,
                       child:Row(
@@ -227,7 +202,10 @@ class SignUpScreenState extends State<SignUpScreen>{
                         children: [
                           GestureDetector(
                             onTap: () {
-                              widget.show;
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (_)=>  const LoginScreen(),
+                                  ));
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.3,
